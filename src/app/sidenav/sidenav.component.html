@@ -1,0 +1,46 @@
+<div [@widthToggle]="openSidenavClicked ? 'in' : 'out'">
+	<div [ngClass]="{'d-none': openSidenavClicked}" class="d-flex flex-column flex-shrink-0 bg-body-tertiary mt-0" style="width: 100%">
+		<a
+			(click)="openSidenav()"
+			class="d-flex align-items-center justify-content-center py-2 link-body-emphasis text-decoration-none"
+			data-bs-toggle="tooltip"
+			data-bs-placement="right"
+			data-bs-original-title="Icon-only">
+			<i class="bi bi-list"></i>
+		</a>
+		<ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+			<li *ngFor="let sidenavItem of sideNavItems" class="nav-item">
+				<a
+					[href]="sidenavItem.route"
+					class="nav-link active border-bottom rounded-0 d-flex align-items-center justify-content-center py-2"
+					aria-current="page"
+					data-bs-toggle="tooltip"
+					data-bs-placement="right"
+					[attr.aria-label]="sidenavItem.name"
+					[attr.data-bs-original-title]="sidenavItem.name">
+					<i class="{{ sidenavItem.icon }}"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div [ngClass]="{'d-none': !openSidenavClicked}" class="d-flex flex-column flex-shrink-0 bg-body-tertiary" style="width: 100%">
+		<a
+			(click)="openSidenav()"
+			class="d-flex align-items-center justify-content-center py-2 link-body-emphasis text-decoration-none"
+			data-bs-toggle="tooltip"
+			data-bs-placement="right"
+			data-bs-original-title="Icon-only">
+			<i class="bi bi-list"></i>
+		</a>
+		<ul class="nav nav-pills flex-column mb-0">
+			@for(sidenavItem of sideNavItems; track sidenavItem){
+			<li class="nav-item">
+				<a [href]="sidenavItem.route" class="nav-link active border-bottom rounded-start-0" aria-current="page" style="white-space: nowrap;">
+					<i class="{{ sidenavItem.icon }}"></i>
+					{{ sidenavItem.name }}
+				</a>
+			</li>
+			}
+		</ul>
+	</div>
+</div>
